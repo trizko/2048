@@ -1,98 +1,95 @@
 var Game = function () {
-  this.board = [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0]
-  ];
-  this.generateRandom();
-  this.generateRandom();
+    this.board = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ];
+    this.generateRandom();
+    this.generateRandom();
 };
 
 Game.prototype.toString = function () {
-  var result = '\n';
+    var result = '\n';
 
-  this.board.forEach(function (row) {
-    row.forEach(function (value) {
-      result = result + value + '\t';
+    this.board.forEach(function (row) {
+        row.forEach(function (value) {
+            result = result + value + '\t';
+        });
+        result = result + '\n';
     });
 
-    result = result + '\n';
-  });
-
-  return result;
+    return result;
 };
 
 Game.prototype.generateRandom = function () {
-  var zeroPositions = findZeroes(this.board);
-  var randomPosition = randomIndex(zeroPositions);
+    var zeroPositions = findZeroes(this.board);
+    var randomPosition = randomIndex(zeroPositions);
 
-  this.board[randomPosition[0]][randomPosition[1]] = 2;
+    this.board[randomPosition[0]][randomPosition[1]] = 2;
 };
 
 Game.prototype.moveLeft = function () {
-  var newBoard = [];
+    var newBoard = [];
 
-  this.board.forEach(function (row) {
-    row = removeZeroes(row);
-    row = squishRowLeft(row);
-    row = appendZeroes(row);
+    this.board.forEach(function (row) {
+        row = removeZeroes(row);
+        row = squishRowLeft(row);
+        row = appendZeroes(row);
 
-    newBoard.push(row);
-  });
+        newBoard.push(row);
+    });
 
-  this.board = newBoard;
-  this.generateRandom();
+    this.board = newBoard;
+    this.generateRandom();
 };
 
 Game.prototype.moveRight = function () {
-  var newBoard = [];
+    var newBoard = [];
 
-  this.board.forEach(function (row) {
-    row = removeZeroes(row);
-    row = squishRowRight(row);
-    row = prependZeroes(row);
+    this.board.forEach(function (row) {
+        row = removeZeroes(row);
+        row = squishRowRight(row);
+        row = prependZeroes(row);
 
-    newBoard.push(row);
-  });
+        newBoard.push(row);
+    });
 
-  this.board = newBoard;
-  this.generateRandom();
+    this.board = newBoard;
+    this.generateRandom();
 };
 
 Game.prototype.moveUp = function () {
-  var newBoard = [];
-  var rotated = rotateMatrixCounterClockwise(this.board);
+    var newBoard = [];
+    var rotated = rotateMatrixCounterClockwise(this.board);
 
-  rotated.forEach(function (row) {
-    row = removeZeroes(row);
-    row = squishRowLeft(row);
-    row = appendZeroes(row);
+    rotated.forEach(function (row) {
+        row = removeZeroes(row);
+        row = squishRowLeft(row);
+        row = appendZeroes(row);
 
-    newBoard.push(row);
-  });
+        newBoard.push(row);
+    });
 
-  this.board = rotateMatrixClockwise(newBoard);
-  this.generateRandom();
+    this.board = rotateMatrixClockwise(newBoard);
+    this.generateRandom();
 };
 
 Game.prototype.moveDown = function () {
-  var newBoard = [];
-  var rotated = rotateMatrixClockwise(this.board);
+    var newBoard = [];
+    var rotated = rotateMatrixClockwise(this.board);
 
-  rotated.forEach(function (row) {
-    row = removeZeroes(row);
-    row = squishRowLeft(row);
-    row = appendZeroes(row);
+    rotated.forEach(function (row) {
+        row = removeZeroes(row);
+        row = squishRowLeft(row);
+        row = appendZeroes(row);
 
-    newBoard.push(row);
-  });
+        newBoard.push(row);
+    });
 
-  this.board = rotateMatrixCounterClockwise(newBoard);
-  this.generateRandom();
+    this.board = rotateMatrixCounterClockwise(newBoard);
+    this.generateRandom();
 };
-
-var game = new Game();
 
 
 /////////////////////////////
@@ -102,105 +99,105 @@ var game = new Game();
 /////////////////////////////
 
 function removeZeroes (row) {
-  return row.filter(function(item){
-    return item !== 0;
-  });
+    return row.filter(function(item){
+        return item !== 0;
+    });
 }
 
 function squishRowLeft (row) {
-  var result = [];
+    var result = [];
 
-  for (var i = 0; i < row.length; i = i + 1) {
-    if (row[i] === row[i + 1]) {
-      result.push(row[i] + row[i + 1]);
-      i = i + 1;
-    } else {
-      result.push(row[i]);
+    for (var i = 0; i < row.length; i = i + 1) {
+        if (row[i] === row[i + 1]) {
+            result.push(row[i] + row[i + 1]);
+            i = i + 1;
+        } else {
+            result.push(row[i]);
+        }
     }
-  }
 
-  return result;
+    return result;
 }
 
 function squishRowRight (row) {
-  var result = [];
+    var result = [];
 
-  for (var i = row.length - 1; i >= 0; i = i - 1) {
-    if (row[i] === row[i - 1]) {
-      result.unshift(row[i] + row[i - 1]);
-      i = i - 1;
-    } else {
-      result.unshift(row[i]);
+    for (var i = row.length - 1; i >= 0; i = i - 1) {
+        if (row[i] === row[i - 1]) {
+            result.unshift(row[i] + row[i - 1]);
+            i = i - 1;
+        } else {
+            result.unshift(row[i]);
+        }
     }
-  }
 
-  return result;
+    return result;
 }
 
 function prependZeroes (row) {
-  var result = row.slice();
+    var result = row.slice();
 
-  while (result.length < 4) {
-    result.unshift(0);
-  }
+    while (result.length < 4) {
+        result.unshift(0);
+    }
 
-  return result;
+    return result;
 }
 
 function appendZeroes (row) {
-  var result = row.slice();
+    var result = row.slice();
 
-  while (result.length < 4) {
-    result.push(0);
-  }
+    while (result.length < 4) {
+        result.push(0);
+    }
 
-  return result;
+    return result;
 }
 
 function rotateMatrixCounterClockwise (matrix) {
-  var result = [];
+    var result = [];
 
-  for (var i = matrix.length - 1; i >= 0; i = i - 1) {
-    var row = [];
-    for (var j = 0; j < matrix[i].length; j = j + 1) {
-      row.push(matrix[j][i]);
+    for (var i = matrix.length - 1; i >= 0; i = i - 1) {
+        var row = [];
+        for (var j = 0; j < matrix[i].length; j = j + 1) {
+            row.push(matrix[j][i]);
+        }
+        result.push(row);
     }
-    result.push(row);
-  }
 
-  return result;
+    return result;
 }
 
 function rotateMatrixClockwise (matrix) {
-  var result = [];
+    var result = [];
 
-  for (var i = 0; i < matrix.length; i = i + 1) {
-    var row = [];
-    for (var j = matrix[i].length - 1; j >= 0; j = j - 1) {
-      row.push(matrix[j][i]);
+    for (var i = 0; i < matrix.length; i = i + 1) {
+        var row = [];
+        for (var j = matrix[i].length - 1; j >= 0; j = j - 1) {
+            row.push(matrix[j][i]);
+        }
+        result.push(row);
     }
-    result.push(row);
-  }
 
-  return result;
+    return result;
 }
 
 function findZeroes (matrix) {
-  var result = [];
+    var result = [];
 
-  for (var i = 0; i < matrix.length; i = i + 1) {
-    for (var j = 0; j < matrix[i].length; j = j + 1) {
-      if (matrix[i][j] === 0) {
-        result.push([i, j]);
-      }
+    for (var i = 0; i < matrix.length; i = i + 1) {
+        for (var j = 0; j < matrix[i].length; j = j + 1) {
+            if (matrix[i][j] === 0) {
+                result.push([i, j]);
+            }
+        }
     }
-  }
 
-  return result;
+    return result;
 }
 
 function randomIndex (array) {
-  var index = Math.floor(Math.random()*array.length);
+    var index = Math.floor(Math.random()*array.length);
 
-  return array[index];
+    return array[index];
 }
