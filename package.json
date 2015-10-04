@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/trizko/2048",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "serve-static": "^1.10.0"
   }
 }
