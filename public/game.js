@@ -27,7 +27,7 @@
 
     Game.prototype.generateRandom = function () {
         var zeroPositions = findZeroes(this.board);
-        var randomPosition = randomIndex(zeroPositions);
+        var randomPosition = randomCoordinate(zeroPositions);
 
         this.board[randomPosition[0]][randomPosition[1]] = 2;
     };
@@ -199,7 +199,7 @@
         return result;
     }
 
-    function randomIndex (array) {
+    function randomCoordinate (array) {
         var index = Math.floor(Math.random()*array.length);
 
         return array[index];
