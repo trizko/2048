@@ -1,3 +1,7 @@
+# coreos cloud-configs
+cloud-config
+!cloud-config.sample
+
 # Vagrant
 .vagrant
 
