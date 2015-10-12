@@ -38,3 +38,17 @@ coreos:
 
       [Install]
       WantedBy=sockets.target
+  - name: 2048.service
+    command: start
+    enable: true
+    content: |
+      [Unit]
+      Description=2048 Web Application
+      Requires=docker.service
+
+      [Service]
+      ExecStartPre=-/usr/bin/docker kill 2048
+      ExecStartPre=-/usr/bin/docker rm 2048
+      ExecStartPre=/usr/bin/docker build -t trizko/2048 /home/core/share/
+      ExecStart=/usr/bin/docker run --name 2048 -p 8080:8080 trizko/2048
+      ExecStop=/usr/bin/docker stop 2048
