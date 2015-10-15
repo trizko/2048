@@ -76,7 +76,7 @@
     };
 
     Game.prototype.moveUp = function() {
-        var self = this
+        var self = this;
         var newBoard = [];
         var rotated = transpose(self.board, self.rowLength, self.colLength);
 
@@ -93,7 +93,7 @@
     };
 
     Game.prototype.moveDown = function() {
-        var self = this
+        var self = this;
         var newBoard = [];
         var rotated = transpose(self.board);
 
