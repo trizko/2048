@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>2048</title>
-    </head>
-    <body>
-        <h1>2048</h1>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="js/actions.js"></script>
-        <script type="text/javascript" src="js/game.js"></script>
-    </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>2048</title>
+  <link type="text/css" rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <h1>2048</h1>
+  <form id="form1">Columns:<br>
+    <input id="columnSize" type="text" name="columns" value="4">
+    <br>Rows:<br>
+    <input id="rowSize" type="text" name="rows" value="4">
+    <input id="submitButton" type="submit" value="Submit">
+  </form>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="js/actions.js"></script>
+  <script type="text/javascript" src="js/game.js"></script>
+  <div>
+    <div></div>
+    <table class="table1">
+    </table>
+  </div>
+</body>
+
 </html>
