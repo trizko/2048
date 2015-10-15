@@ -116,13 +116,13 @@
     /////////////////////////////
     /////////////////////////////
 
-    function removeZeroes(row) {
+    function removeZeroes (row) {
         return row.filter(function (item) {
             return item !== 0;
         });
     }
 
-    function squishRowLeft(row) {
+    function squishRowLeft (row) {
         var result = [];
 
         for (var i = 0; i < row.length; i = i + 1) {
@@ -137,7 +137,7 @@
         return result;
     }
 
-    function squishRowRight(row) {
+    function squishRowRight (row) {
         var result = [];
 
         for (var i = row.length - 1; i >= 0; i = i - 1) {
@@ -152,7 +152,7 @@
         return result;
     }
 
-    function prependZeroes(row, padding) {
+    function prependZeroes (row, padding) {
         var result = row.slice();
 
         while (result.length < padding) {
@@ -162,7 +162,7 @@
         return result;
     }
 
-    function appendZeroes(row, padding) {
+    function appendZeroes (row, padding) {
         var result = row.slice();
 
         while (result.length < padding) {
@@ -172,7 +172,7 @@
         return result;
     }
 
-    function transpose(array, arrayWidth, arrayHeight) {
+    function transpose (array, arrayWidth, arrayHeight) {
         var newArray = [];
 
         for (var i = 0; i < array[0].length; i++) {
@@ -184,7 +184,7 @@
         return newArray;
     }
 
-    function findZeroes(matrix) {
+    function findZeroes (matrix) {
         var result = [];
 
         for (var i = 0; i < matrix.length; i = i + 1) {
@@ -198,12 +198,11 @@
         return result;
     }
 
-    function randomCoordinate(array) {
+    function randomCoordinate (array) {
         var index = Math.floor(Math.random() * array.length);
 
         return array[index];
     }
 
     window.Game = Game;
-    window.transpose = transpose;
 })();
