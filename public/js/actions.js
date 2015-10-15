@@ -1,8 +1,8 @@
-$(document).on('ready', function(){
+$(document).on('ready', function () {
 
-    var game = new Game();
+    window.game = new Game(4, 4);
 
-    $( "body" ).keyup(function( event ) {
+    $("body").keyup(function (event) {
         switch (event.which) {
             case 37:
                 game.moveLeft()
@@ -24,5 +24,4 @@ $(document).on('ready', function(){
                 break;
         }
     });
-
 });
