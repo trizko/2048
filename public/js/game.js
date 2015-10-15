@@ -1,7 +1,7 @@
-(function() {
+(function () {
     'use strict';
 
-    var Game = function(colLength, rowLength) {
+    var Game = function (colLength, rowLength) {
         this.board = this.createGame(colLength, rowLength);
         this.rowLength = rowLength;
         this.colLength = colLength;
@@ -9,7 +9,7 @@
         this.generateRandom();
     };
 
-    Game.prototype.createGame = function(colLength, rowLength) {
+    Game.prototype.createGame = function (colLength, rowLength) {
         var matrix = [];
 
         for (var i = 0; i < rowLength; i++) {
@@ -22,11 +22,11 @@
         return matrix;
     };
 
-    Game.prototype.toString = function() {
+    Game.prototype.toString = function () {
         var result = '\n';
 
-        this.board.forEach(function(row) {
-            row.forEach(function(value) {
+        this.board.forEach(function (row) {
+            row.forEach(function (value) {
                 result = result + value + '\t';
             });
             result = result + '\n';
@@ -35,18 +35,18 @@
         return result;
     };
 
-    Game.prototype.generateRandom = function() {
+    Game.prototype.generateRandom = function () {
         var zeroPositions = findZeroes(this.board);
         var randomPosition = randomCoordinate(zeroPositions);
 
         this.board[randomPosition[0]][randomPosition[1]] = 2;
     };
 
-    Game.prototype.moveLeft = function() {
+    Game.prototype.moveLeft = function () {
         var self = this;
         var newBoard = [];
 
-        self.board.forEach(function(row) {
+        self.board.forEach(function (row) {
             row = removeZeroes(row);
             row = squishRowLeft(row);
             row = appendZeroes(row, self.colLength);
@@ -59,11 +59,11 @@
         self.generateRandom();
     };
 
-    Game.prototype.moveRight = function() {
+    Game.prototype.moveRight = function () {
         var self = this;
         var newBoard = [];
 
-        this.board.forEach(function(row) {
+        this.board.forEach(function (row) {
             row = removeZeroes(row);
             row = squishRowRight(row);
             row = prependZeroes(row, self.colLength);
@@ -75,12 +75,12 @@
         self.generateRandom();
     };
 
-    Game.prototype.moveUp = function() {
+    Game.prototype.moveUp = function () {
         var self = this;
         var newBoard = [];
         var rotated = transpose(self.board, self.rowLength, self.colLength);
 
-        rotated.forEach(function(row) {
+        rotated.forEach(function (row) {
             row = removeZeroes(row);
             row = squishRowLeft(row);
             row = appendZeroes(row, self.rowLength);
@@ -92,12 +92,12 @@
         self.generateRandom();
     };
 
-    Game.prototype.moveDown = function() {
+    Game.prototype.moveDown = function () {
         var self = this;
         var newBoard = [];
         var rotated = transpose(self.board);
 
-        rotated.forEach(function(row) {
+        rotated.forEach(function (row) {
             row = removeZeroes(row);
             row = squishRowRight(row);
             row = prependZeroes(row, self.rowLength);
@@ -117,7 +117,7 @@
     /////////////////////////////
 
     function removeZeroes(row) {
-        return row.filter(function(item) {
+        return row.filter(function (item) {
             return item !== 0;
         });
     }
