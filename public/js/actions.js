@@ -1,6 +1,6 @@
 $(document).on('ready', function(){
 
-    var game = new Game(4, 4);
+    window.game = new Game(4, 4);
 
     $( "body" ).keyup(function( event ) {
         switch (event.which) {

@@ -1,25 +1,27 @@
 (function() {
   'use strict';
 
-  var Game = function(row, column) {
-    this.board = this.createGame(row, column);
+  var Game = function(colLength, rowLength) {
+    this.board = this.createGame(colLength, rowLength);
+    this.rowLength = rowLength;
+    this.colLength = colLength;
     this.generateRandom();
     this.generateRandom();
   };
 
-  Game.prototype.createGame = function(row, column) {
+  Game.prototype.createGame = function(colLength, rowLength) {
     var matrix = [];
 
-    for (var i = 0; i < row; i++) {
+    for (var i = 0; i < rowLength; i++) {
       matrix.push([]);
-      for (var k = 0; k < column; k++) {
+      for (var k = 0; k < colLength; k++) {
         matrix[i].push(0);
       }
     }
 
     return matrix;
   };
-  
+
   Game.prototype.toString = function() {
     var result = '\n';
 
@@ -41,65 +43,70 @@
   };
 
   Game.prototype.moveLeft = function() {
+    var self = this;
     var newBoard = [];
 
-    this.board.forEach(function(row) {
+    self.board.forEach(function(row) {
       row = removeZeroes(row);
       row = squishRowLeft(row);
-      row = appendZeroes(row);
+      row = appendZeroes(row, self.colLength);
 
       newBoard.push(row);
     });
 
-    this.board = newBoard;
-    this.generateRandom();
+
+    self.board = newBoard;
+    self.generateRandom();
   };
 
   Game.prototype.moveRight = function() {
+    var self = this;
     var newBoard = [];
 
     this.board.forEach(function(row) {
       row = removeZeroes(row);
       row = squishRowRight(row);
-      row = prependZeroes(row);
+      row = prependZeroes(row, self.colLength);
 
       newBoard.push(row);
     });
 
-    this.board = newBoard;
-    this.generateRandom();
+    self.board = newBoard;
+    self.generateRandom();
   };
 
   Game.prototype.moveUp = function() {
+    var self = this
     var newBoard = [];
-    var rotated = rotateMatrixCounterClockwise(this.board);
+    var rotated = transpose(self.board, self.rowLength, self.colLength);
 
     rotated.forEach(function(row) {
       row = removeZeroes(row);
       row = squishRowLeft(row);
-      row = appendZeroes(row);
+      row = appendZeroes(row, self.rowLength);
 
       newBoard.push(row);
     });
 
-    this.board = rotateMatrixClockwise(newBoard);
-    this.generateRandom();
+    self.board = transpose(newBoard);
+    self.generateRandom();
   };
 
   Game.prototype.moveDown = function() {
+    var self = this
     var newBoard = [];
-    var rotated = rotateMatrixClockwise(this.board);
+    var rotated = transpose(self.board);
 
     rotated.forEach(function(row) {
       row = removeZeroes(row);
-      row = squishRowLeft(row);
-      row = appendZeroes(row);
+      row = squishRowRight(row);
+      row = prependZeroes(row, self.rowLength);
 
       newBoard.push(row);
     });
 
-    this.board = rotateMatrixCounterClockwise(newBoard);
-    this.generateRandom();
+    self.board = transpose(newBoard);
+    self.generateRandom();
   };
 
 
@@ -145,52 +152,36 @@
     return result;
   }
 
-  function prependZeroes(row) {
+  function prependZeroes(row, padding) {
     var result = row.slice();
 
-    while (result.length < 4) {
+    while (result.length < padding) {
       result.unshift(0);
     }
 
     return result;
   }
 
-  function appendZeroes(row) {
+  function appendZeroes(row, padding) {
     var result = row.slice();
 
-    while (result.length < 4) {
+    while (result.length < padding) {
       result.push(0);
     }
 
     return result;
   }
 
-  function rotateMatrixCounterClockwise(matrix) {
-    var result = [];
+  function transpose(array, arrayWidth, arrayHeight) {
+    var newArray = [];
 
-    for (var i = matrix.length - 1; i >= 0; i = i - 1) {
-      var row = [];
-      for (var j = 0; j < matrix[i].length; j = j + 1) {
-        row.push(matrix[j][i]);
-      }
-      result.push(row);
+    for (var i = 0; i < array[0].length; i++) {
+        newArray[i] = [];
+        for (var j = 0; j < array.length; j++) {
+            newArray[i][j] = array[j][i];
+        }
     }
-
-    return result;
-  }
-
-  function rotateMatrixClockwise(matrix) {
-    var result = [];
-
-    for (var i = 0; i < matrix.length; i = i + 1) {
-      var row = [];
-      for (var j = matrix[i].length - 1; j >= 0; j = j - 1) {
-        row.push(matrix[j][i]);
-      }
-      result.push(row);
-    }
-
-    return result;
+    return newArray;
   }
 
   function findZeroes(matrix) {
@@ -214,4 +205,5 @@
   }
 
   window.Game = Game;
+  window.transpose = transpose;
 })();
