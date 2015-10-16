@@ -4,7 +4,7 @@ $(document).ready(function () {
     var rowForm = $("#rowSize").val();
 
     window.game = new Game(columnForm, rowForm);
-    window.game();
+    window.game.start();
 
     appendData();
 
