@@ -5,8 +5,8 @@ $(document).ready(function () {
 
         $(".table1").empty();
 
-        columnForm = $("#columnSize").val();
-        rowForm = $("#rowSize").val();
+        var columnForm = $("#columnSize").val();
+        var rowForm = $("#rowSize").val();
 
         window.game = new Game(columnForm, rowForm);
         window.game.start();
