@@ -1,8 +1,5 @@
 $(document).ready(function () {
 
-    var columnForm = $("#columnSize").val();
-    var rowForm = $("#rowSize").val();
-
     $("form").submit(function (event) {
         event.preventDefault();
 
@@ -15,10 +12,6 @@ $(document).ready(function () {
         window.game.start();
         appendData();
     });
-
-    window.game = new Game(columnForm, rowForm);
-    window.game.start();
-    appendData();
 
     $(document).keydown(function (key) {
         switch (parseInt(key.which, 10)) {
