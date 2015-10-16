@@ -5,8 +5,27 @@
         this.board = this.createGame(colLength, rowLength);
         this.rowLength = rowLength;
         this.colLength = colLength;
-        this.generateRandom();
-        this.generateRandom();
+        this.moveablesLeft = [];
+        this.moveablesRight = [];
+        this.moveablesUp = [];
+        this.moveablesDown = [];
+    };
+
+    Game.prototype.start = function () {
+        var self = this;
+
+        self.generateRandom();
+        self.generateRandom();
+        self.generateMoveables();
+    };
+
+    Game.prototype.generateMoveables = function () {
+        var self = this;
+
+        self.moveablesLeft = getMoveablesLeft(self.board);
+        self.moveablesRight = getMoveablesRight(self.board);
+        self.moveablesUp = getMoveablesUp(self.board);
+        self.moveablesDown = getMoveablesDown(self.board);
     };
 
     Game.prototype.createGame = function (colLength, rowLength) {
@@ -46,6 +65,10 @@
         var self = this;
         var newBoard = [];
 
+        if (self.moveablesLeft.length === 0) {
+            return;
+        }
+
         self.board.forEach(function (row) {
             row = removeZeroes(row);
             row = squishRowLeft(row);
@@ -57,11 +80,16 @@
 
         self.board = newBoard;
         self.generateRandom();
+        self.generateMoveables();
     };
 
     Game.prototype.moveRight = function () {
         var self = this;
         var newBoard = [];
+
+        if (self.moveablesRight.length === 0) {
+            return;
+        }
 
         this.board.forEach(function (row) {
             row = removeZeroes(row);
@@ -73,12 +101,17 @@
 
         self.board = newBoard;
         self.generateRandom();
+        self.generateMoveables();
     };
 
     Game.prototype.moveUp = function () {
         var self = this;
         var newBoard = [];
         var rotated = transpose(self.board, self.rowLength, self.colLength);
+
+        if (self.moveablesUp.length === 0) {
+            return;
+        }
 
         rotated.forEach(function (row) {
             row = removeZeroes(row);
@@ -90,12 +123,17 @@
 
         self.board = transpose(newBoard);
         self.generateRandom();
+        self.generateMoveables();
     };
 
     Game.prototype.moveDown = function () {
         var self = this;
         var newBoard = [];
         var rotated = transpose(self.board);
+
+        if (self.moveablesDown.length === 0) {
+            return;
+        }
 
         rotated.forEach(function (row) {
             row = removeZeroes(row);
@@ -107,6 +145,7 @@
 
         self.board = transpose(newBoard);
         self.generateRandom();
+        self.generateMoveables();
     };
 
 
@@ -202,6 +241,72 @@
         var index = Math.floor(Math.random() * array.length);
 
         return array[index];
+    }
+
+    function getMoveablesRight (matrix) {
+        var result = [];
+
+        matrix.forEach(function (row, i) {
+            row.forEach(function (val, j) {
+                if (isMoveable(val, row[j + 1])) {
+                    result.push([i, j]);
+                }
+            });
+        });
+
+        return result;
+    }
+
+    function getMoveablesLeft (matrix) {
+        var result = [];
+
+        matrix.forEach(function (row, i) {
+            row.forEach(function (val, j) {
+                if (isMoveable(val, row[j - 1])) {
+                    result.push([i, j]);
+                }
+            });
+        });
+
+        return result;
+    }
+
+    function getMoveablesUp (matrix) {
+        var result = [];
+
+        matrix.forEach(function (row, i) {
+            row.forEach(function (val, j) {
+                if (matrix[i - 1] !== undefined && isMoveable(val, matrix[i - 1][j])) {
+                    result.push([i, j]);
+                }
+            });
+        });
+
+        return result;
+    }
+
+    function getMoveablesDown (matrix) {
+        var result = [];
+
+        matrix.forEach(function (row, i) {
+            row.forEach(function (val, j) {
+                if (matrix[i + 1] !== undefined && isMoveable(val, matrix[i + 1][j])) {
+                    result.push([i, j]);
+                }
+            });
+        });
+
+        return result;
+    }
+
+    function isMoveable (first, second) {
+        if (first !== 0 && second !== undefined) {
+            if (first === second || second === 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     window.Game = Game;
