@@ -1,30 +1,31 @@
 $(document).ready(function () {
 
-    var columnForm = $("#columnSize").val();
-    var rowForm = $("#rowSize").val();
+    $("form").submit(function (event) {
+        event.preventDefault();
 
-    window.game = new Game(columnForm, rowForm);
-    window.game.start();
+        $(".table1").empty();
 
-    appendData();
+        var columnForm = $("#columnSize").val();
+        var rowForm = $("#rowSize").val();
+
+        window.game = new Game(columnForm, rowForm);
+        window.game.start();
+        appendData();
+    });
 
     $(document).keydown(function (key) {
         switch (parseInt(key.which, 10)) {
             case 37:
                 game.moveLeft()
-                console.log(game.toString());
                 break;
             case 38:
                 game.moveUp()
-                console.log(game.toString());
                 break;
             case 39:
                 game.moveRight()
-                console.log(game.toString());
                 break;
             case 40:
                 game.moveDown()
-                console.log(game.toString());
                 break;
             default:
                 break;
