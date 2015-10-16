@@ -52,4 +52,5 @@ coreos:
       ExecStartPre=/usr/bin/git clone https://github.com/trizko/2048.git /home/core/share
       ExecStartPre=/usr/bin/docker build -t trizko/2048 /home/core/share/
       ExecStart=/usr/bin/docker run --name 2048 -p 8080:8080 trizko/2048
+      ExecStop=/usr/bin/rm -rf /home/core/share
       ExecStop=/usr/bin/docker stop 2048
