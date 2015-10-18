@@ -1,17 +1,16 @@
 table {
     margin: auto;
     border: auto;
-    border:3px solid #000000;
     border-radius: 10px;
+    background-color: #BBADA0;
+    padding: 8px;
 }
 
 td {
     width: 100px;
     height: 100px;
-    border: 3px solid #000000;
     border-radius: 10px;
     text-align: center;
     font-size: 40px;
     font-family: "Arial Black", Gadget, sans-serif;
-    font-weight: bold;
 }
