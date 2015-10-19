@@ -1,3 +1,20 @@
+var colors = {
+    0: '#CDC1B4',
+    2: '#FAF8EF',
+    4: '#EDE0C8',
+    8: '#F2B179',
+    16: '#F59563',
+    32: '#F67C5E',
+    64: '#F5633D',
+    128: '#EDCF72',
+    256: '#EDC850',
+    512: '#EDC850',
+    1024: '#18EC9E',
+    2048: '#18EC9E',
+    4096: '#18EC9E',
+    8192: '#18EC9E'
+}
+
 $(document).ready(function () {
 
     var columnForm = $("#columnSize").val();
@@ -60,71 +77,71 @@ var refreshData = function () {
             switch (game.board[i][j]) {
                 case 0:
                     $('.data' + i + j).html(" ")
-                    $('.data' + i + j).css('background-color', '#CDC1B4')
+                    $('.data' + i + j).css('background-color', colors[0])
                     break;
                 case 2:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#FAF8EF')
+                    $('.data' + i + j).css('background-color', colors[2])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 4:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#EDE0C8')
+                    $('.data' + i + j).css('background-color', colors[4])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 8:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#F2B179')
+                    $('.data' + i + j).css('background-color', colors[8])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 16:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#F59563')
+                    $('.data' + i + j).css('background-color', colors[16])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 32:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#F67C5E')
+                    $('.data' + i + j).css('background-color', colors[32])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 64:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#F5633D')
+                    $('.data' + i + j).css('background-color', colors[64])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 128:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#EDCF72')
+                    $('.data' + i + j).css('background-color', colors[128])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 256:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#EDCC61')
+                    $('.data' + i + j).css('background-color', colors[256])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 512:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#EDC850')
+                    $('.data' + i + j).css('background-color', colors[512])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 1024:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#18EC9E')
+                    $('.data' + i + j).css('background-color', colors[1024])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 2048:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#18EC9E')
+                    $('.data' + i + j).css('background-color', colors[2048])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 4096:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#18EC9E')
+                    $('.data' + i + j).css('background-color', colors[4096])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
                 case 8192:
                     $('.data' + i + j).html(game.board[i][j])
-                    $('.data' + i + j).css('background-color', '#18EC9E')
+                    $('.data' + i + j).css('background-color', colors[8192])
                     $('.data' + i + j).css('opacity', '1.0')
                     break;
             }
