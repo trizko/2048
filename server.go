@@ -5,7 +5,7 @@ import (
     "log"
     "os"
     "bufio"
-    "strings"
+    "path/filepath"
 )
 
 func main() {
@@ -24,36 +24,43 @@ func main() {
 func indexHandler(w http.ResponseWriter, r *http.Request) {
     file, err := os.Open("public/index.html")
     if err != nil {
-        w.WriteHeader(404)
-        w.Write([]byte("404 - " + http.StatusText(http.StatusNotFound)))
-    } else {
-        bw := bufio.NewReader(file);
-
-        bw.WriteTo(w)
+        http.Error(w, "404 - Not Found", http.StatusNotFound)
+        return
     }
+    defer file.Close()
+
+    bw := bufio.NewReader(file);
+    bw.WriteTo(w)
 }
 
 func staticHandler(w http.ResponseWriter, r *http.Request) {
     path := "public/" + r.URL.Path
+
     file, err := os.Open(path)
     if err != nil {
-        w.WriteHeader(404)
-        w.Write([]byte("404 - " + http.StatusText(http.StatusNotFound)))
-    } else {
-        var contentType string
-        bw := bufio.NewReader(file)
-
-        if strings.HasSuffix(path, ".css") {
-            contentType = "text/css"
-        } else if strings.HasSuffix(path, ".png") {
-            contentType = "image/png"
-        } else if strings.HasSuffix(path, ".js") {
-            contentType = "application/js"
-        } else {
-            contentType = "text/plain"
-        }
-
-        w.Header().Set("Content-Type", contentType)
-        bw.WriteTo(w)
+        http.Error(w, "404 - Not Found", http.StatusNotFound)
+        return
     }
+    defer file.Close();
+
+    bw := bufio.NewReader(file)
+    w.Header().Set("Content-Type", getContentType(path))
+    bw.WriteTo(w)
+}
+
+func getContentType(path string) string {
+	var contentType string
+
+	switch filepath.Ext(path) {
+	case ".css":
+		contentType = "text/css"
+	case ".png":
+		contentType = "image/png"
+	case ".js":
+		contentType = "application/js"
+	default:
+		contentType = "text/plain"
+	}
+
+	return contentType
 }
