@@ -1,16 +1,36 @@
 table {
     margin: auto;
-    border: auto;
     border-radius: 10px;
     background-color: #BBADA0;
     padding: 8px;
 }
 
 td {
-    width: 100px;
-    height: 100px;
+    width: 2em;
+    height: 2em;
     border-radius: 10px;
     text-align: center;
     font-size: 40px;
     font-family: "Arial Black", Gadget, sans-serif;
+}
+
+
+h1 {
+    display: none;
+}
+
+.table-responsive {
+    background-color: #BBADA0;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+.ui-page {
+    min-height: 0px !important;
+    outline-width: 0px;
+}
+
+.ui-mobile {
+    margin: 4px;
 }
