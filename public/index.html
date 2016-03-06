@@ -6,7 +6,14 @@
     <link type="text/css" rel="stylesheet" href="css/styles.css" />
 </head>
     <body>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <!-- <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> -->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
         <script type="text/javascript" src="js/actions.js"></script>
         <script type="text/javascript" src="js/game.js"></script>
         <h1>2048</h1>
@@ -14,12 +21,14 @@
             <input id="columnSize" type="text" name="columns" value="4">
             <br>Rows:<br>
             <input id="rowSize" type="text" name="rows" value="4">
-            <input id="submitButton" type="submit" value="Submit">
+            <input class="btn-default" id="submitButton" type="submit" value="Submit">
         </form>
         <div>
             <div></div>
-            <table class="table1">
-            </table>
+            <div class="">
+                <table class="table-responsive table1">
+                </table>
+            </div>
         </div>
     </body>
 </html>
